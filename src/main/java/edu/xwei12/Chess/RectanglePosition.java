@@ -1,12 +1,16 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 /**
- * Created by xinranmsn on 2/1/16.
+ * Rectangle coordinate system
+ * @author Xinran Wei
  */
 public class RectanglePosition implements Coordinates<RectanglePosition> {
 
-    /** Parameters **/
-    public int rank, file;
+    /** Rank component of the coordinates **/
+    public int rank;
+
+    /** File component of the coordinates **/
+    public int file;
 
     /**
      * Constructor of coordinates
@@ -25,14 +29,21 @@ public class RectanglePosition implements Coordinates<RectanglePosition> {
      */
     @Override
     public int distanceTo(RectanglePosition destination) {
+
         // Along rank
-        if (rank == destination.rank) return Math.abs(destination.file - file);
+        if (rank == destination.rank)
+            return Math.abs(destination.file - file);
 
         // Along file
-        else if (file == destination.file) return Math.abs(destination.rank - rank);
+        else if (file == destination.file)
+            return Math.abs(destination.rank - rank);
 
         // Diagonal
-        else return Math.abs(destination.rank - rank);
+        else if (Math.abs(destination.file - file) == Math.abs(destination.rank - rank))
+            return Math.abs(destination.rank - rank);
+
+        // Not applicable
+        return -1;
     }
 
 
@@ -45,6 +56,7 @@ public class RectanglePosition implements Coordinates<RectanglePosition> {
     public boolean sameAs(RectanglePosition other) {
         return other.rank == rank && other.file == file;
     }
+
 
 
 }

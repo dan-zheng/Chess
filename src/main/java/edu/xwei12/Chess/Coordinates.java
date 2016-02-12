@@ -1,5 +1,10 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
+/**
+ * Coordinate system base interface
+ * @author Xinran Wei
+ * @param <T> self-bounding generics
+ */
 public interface Coordinates<T extends Coordinates<T>> {
     /**
      * Compute distance from self to another

@@ -1,0 +1,71 @@
+\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece}{}\section{edu.\+xwei12.\+Chess.\+Piece$<$ B extends Board, C extends Coordinates$<$ C $>$ Class Template Reference}
+\label{classedu_1_1xwei12_1_1_chess_1_1_piece}\index{edu.\+xwei12.\+Chess.\+Piece$<$ B extends Board, C extends Coordinates$<$ C $>$@{edu.\+xwei12.\+Chess.\+Piece$<$ B extends Board, C extends Coordinates$<$ C $>$}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface {\bfseries Move\+Function}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String {\bfseries get\+Identifier} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_ae4c3f67c7d0c481eb6626a701e567285}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_ae4c3f67c7d0c481eb6626a701e567285}
+
+\item 
+Integer {\bfseries get\+Tag} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_a55c64c1616559de0c233b37c6a258276}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_a55c64c1616559de0c233b37c6a258276}
+
+\item 
+\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece_a8e99c05d682f35cdf5e38da3aa4212a9}{Piece} (String kind, int tag, Move\+Function$<$ B, C $>$ move\+Function)
+\item 
+Move\+Function$<$ B, C $>$ \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece_ab4f4f8f58b85204ff64bde29e9c6e6cb}{get\+Mover} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries set\+Identifier} (String identifier)\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_ac62e8b26b33259f92879092cb1cb9965}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_ac62e8b26b33259f92879092cb1cb9965}
+
+\item 
+void {\bfseries set\+Tag} (Integer tag)\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_a08ab7933898c00c8ebaf08338a1a2d87}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_a08ab7933898c00c8ebaf08338a1a2d87}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Piece.\+java Created by xinranmsn on 1/31/16. \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece}{Piece} class
+
+Properties\+: mover \+:\+: (position, board, distance) -\/$>$ position\+Set
+
+The mover derives a set of possible moves (destination set) from the context (position, board cells, moving distance) 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{edu\+::xwei12\+::\+Chess\+::\+Piece@{edu\+::xwei12\+::\+Chess\+::\+Piece}!Piece@{Piece}}
+\index{Piece@{Piece}!edu\+::xwei12\+::\+Chess\+::\+Piece@{edu\+::xwei12\+::\+Chess\+::\+Piece}}
+\subsubsection[{\texorpdfstring{Piece(\+String kind, int tag, Move\+Function$<$ B, C $>$ move\+Function)}{Piece(String kind, int tag, MoveFunction< B, C > moveFunction)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf edu.\+xwei12.\+Chess.\+Piece}$<$ B extends {\bf Board}, C extends {\bf Coordinates}$<$ C $>$.{\bf Piece} (
+\begin{DoxyParamCaption}
+\item[{String}]{kind, }
+\item[{int}]{tag, }
+\item[{Move\+Function$<$ B, C $>$}]{move\+Function}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_a8e99c05d682f35cdf5e38da3aa4212a9}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_a8e99c05d682f35cdf5e38da3aa4212a9}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em move\+Function} & \+:\+: (position, board, distance) -\/$>$ position\+Set \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{edu\+::xwei12\+::\+Chess\+::\+Piece@{edu\+::xwei12\+::\+Chess\+::\+Piece}!get\+Mover@{get\+Mover}}
+\index{get\+Mover@{get\+Mover}!edu\+::xwei12\+::\+Chess\+::\+Piece@{edu\+::xwei12\+::\+Chess\+::\+Piece}}
+\subsubsection[{\texorpdfstring{get\+Mover()}{getMover()}}]{\setlength{\rightskip}{0pt plus 5cm}Move\+Function$<$B, C$>$ {\bf edu.\+xwei12.\+Chess.\+Piece}$<$ B extends {\bf Board}, C extends {\bf Coordinates}$<$ C $>$.get\+Mover (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_piece_ab4f4f8f58b85204ff64bde29e9c6e6cb}{}\label{classedu_1_1xwei12_1_1_chess_1_1_piece_ab4f4f8f58b85204ff64bde29e9c6e6cb}
+Get move function \begin{DoxyReturn}{Returns}
+Move function 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/edu/xwei12/\+Chess/Piece.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,127 @@
+\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game}{}\section{edu.\+xwei12.\+Chess.\+Game$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$ Class Template Reference}
+\label{classedu_1_1xwei12_1_1_chess_1_1_game}\index{edu.\+xwei12.\+Chess.\+Game$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$@{edu.\+xwei12.\+Chess.\+Game$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_1_1_move}{Move}
+\item 
+enum \hyperlink{enumedu_1_1xwei12_1_1_chess_1_1_game_1_1_state}{State}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_1_1_move}{Move} {\bfseries get\+Last\+Move} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a92b8a1c86ecb185134542c2ee0549585}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a92b8a1c86ecb185134542c2ee0549585}
+
+\item 
+\hyperlink{enumedu_1_1xwei12_1_1_chess_1_1_game_1_1_state}{State} {\bfseries get\+State} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_af413b5e964c0941228e7845a260f5f24}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_af413b5e964c0941228e7845a260f5f24}
+
+\item 
+\hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_game_observer}{Game\+Observer}$<$ B, C $>$ {\bfseries get\+Observer} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_acfbd7c5c21548fac877a15754c62d83a}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_acfbd7c5c21548fac877a15754c62d83a}
+
+\item 
+B {\bfseries get\+Board} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_aa91b4872682497db5db623bc295145c6}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_aa91b4872682497db5db623bc295145c6}
+
+\item 
+Set$<$ Integer $>$ {\bfseries get\+Players} ()\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_acabc73af5c50828887058d954bf2ee72}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_acabc73af5c50828887058d954bf2ee72}
+
+\item 
+void {\bfseries set\+Observer} (\hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_game_observer}{Game\+Observer}$<$ B, C $>$ observer)\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a794fc5c9fb93e8cc50db32394d3716a0}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a794fc5c9fb93e8cc50db32394d3716a0}
+
+\item 
+\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_a73c44dc17b3d92649165a926c75a2aca}{Game} (B board, String king\+Piece\+Kind, Set$<$ Integer $>$ players)
+\item 
+boolean \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_a63a7e5885a091656ff5cce4202eaed5d}{step\+With\+Move} (Integer player, C from\+Position, C to\+Position)
+\item 
+boolean \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_a3bff3670cd72dbb08696eb3bee725adb}{step\+With\+Move} (\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_1_1_move}{Move} move)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_a9665877b5fde13664a68564fe8a81269}{update\+State} (\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_game_1_1_move}{Move} move)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+B {\bfseries board}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a2bd69faf22d70d3d2a36ae4ad485341c}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a2bd69faf22d70d3d2a36ae4ad485341c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Created by xinranmsn on 1/30/16. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}!Game@{Game}}
+\index{Game@{Game}!edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}}
+\subsubsection[{\texorpdfstring{Game(\+B board, String king\+Piece\+Kind, Set$<$ Integer $>$ players)}{Game(B board, String kingPieceKind, Set< Integer > players)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf edu.\+xwei12.\+Chess.\+Game}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.{\bf Game} (
+\begin{DoxyParamCaption}
+\item[{B}]{board, }
+\item[{String}]{king\+Piece\+Kind, }
+\item[{Set$<$ Integer $>$}]{players}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a73c44dc17b3d92649165a926c75a2aca}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a73c44dc17b3d92649165a926c75a2aca}
+Initialize with a board 
+\begin{DoxyParams}{Parameters}
+{\em board} & chess board \\
+\hline
+{\em king\+Piece\+Kind} & the kind of piece to determine checkmate \\
+\hline
+{\em players} & set of player tags \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}!step\+With\+Move@{step\+With\+Move}}
+\index{step\+With\+Move@{step\+With\+Move}!edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}}
+\subsubsection[{\texorpdfstring{step\+With\+Move(\+Integer player, C from\+Position, C to\+Position)}{stepWithMove(Integer player, C fromPosition, C toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf edu.\+xwei12.\+Chess.\+Game}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.step\+With\+Move (
+\begin{DoxyParamCaption}
+\item[{Integer}]{player, }
+\item[{C}]{from\+Position, }
+\item[{C}]{to\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a63a7e5885a091656ff5cce4202eaed5d}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a63a7e5885a091656ff5cce4202eaed5d}
+Step the game forward with a move 
+\begin{DoxyParams}{Parameters}
+{\em player} & player tag \\
+\hline
+{\em from\+Position} & source \\
+\hline
+{\em to\+Position} & destination \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+moved 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}!step\+With\+Move@{step\+With\+Move}}
+\index{step\+With\+Move@{step\+With\+Move}!edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}}
+\subsubsection[{\texorpdfstring{step\+With\+Move(\+Move move)}{stepWithMove(Move move)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf edu.\+xwei12.\+Chess.\+Game}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.step\+With\+Move (
+\begin{DoxyParamCaption}
+\item[{{\bf Move}}]{move}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a3bff3670cd72dbb08696eb3bee725adb}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a3bff3670cd72dbb08696eb3bee725adb}
+Step the game forward with a move 
+\begin{DoxyParams}{Parameters}
+{\em move} & move \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+moved 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}!update\+State@{update\+State}}
+\index{update\+State@{update\+State}!edu\+::xwei12\+::\+Chess\+::\+Game@{edu\+::xwei12\+::\+Chess\+::\+Game}}
+\subsubsection[{\texorpdfstring{update\+State(\+Move move)}{updateState(Move move)}}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf edu.\+xwei12.\+Chess.\+Game}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.update\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf Move}}]{move}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classedu_1_1xwei12_1_1_chess_1_1_game_a9665877b5fde13664a68564fe8a81269}{}\label{classedu_1_1xwei12_1_1_chess_1_1_game_a9665877b5fde13664a68564fe8a81269}
+Update game state when a move is made 
+\begin{DoxyParams}{Parameters}
+{\em move} & move \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/edu/xwei12/\+Chess/Game.\+java\end{DoxyCompactItemize}

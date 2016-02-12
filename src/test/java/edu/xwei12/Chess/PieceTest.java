@@ -1,4 +1,4 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -95,12 +95,12 @@ public class PieceTest extends TestCase {
         game.stepWithMove(StandardGame.PLAYER_A, 3, 7, 4, 7); // Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 1, 5, 2, 5); // Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 0, 7, 2, 7); // Rook
-        assertEquals(board.getPiece(2, 7).getIdentifier(), "ROOK");
+        assertEquals(board.getPiece(2, 7).getKind(), DefaultPiece.ROOK.getKind());
         game.stepWithMove(StandardGame.PLAYER_B, 6, 0, 4, 0); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 4, 0, 3, 0); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 6, 3, 5, 3); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 7, 0, 5, 0); // Rook
-        assertEquals(board.getPiece(5, 0).getIdentifier(), "ROOK");
+        assertEquals(board.getPiece(5, 0).getKind(), DefaultPiece.ROOK.getKind());
 
         // Print board
         board.print();
@@ -144,25 +144,23 @@ public class PieceTest extends TestCase {
         game.stepWithMove(StandardGame.PLAYER_A, 1, 2, 3, 2); // Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 1, 3, 3, 3); // Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 0, 2, 2, 4); // Bishop
-        assertEquals(board.getPiece(2, 4).getIdentifier(), "BISHOP");
+        assertEquals(board.getPiece(2, 4).getKind(), DefaultPiece.BISHOP.getKind());
         game.stepWithMove(StandardGame.PLAYER_B, 6, 2, 4, 2); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 6, 3, 4, 3); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 7, 2, 4, 5); // Bishop
-        game.stepWithMove(StandardGame.PLAYER_A, 3, 3, 4, 3); // Pawn
+        game.stepWithMove(StandardGame.PLAYER_A, 3, 2, 4, 3); // Pawn
 
         // Print board
         board.print();
 
-        /* Player 1 */
         // Move by 1 square
         moves = mover.apply(new RectanglePosition(2, 4), board, 1);
-        assertEquals(moves.size(), 3);
-        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(3, 3))));
-        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(3, 5))));
+        assertEquals(2, moves.size());
         assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(1, 3))));
+        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(3, 5))));
         // Move by 2 squares
         moves = mover.apply(new RectanglePosition(2, 4), board, 2);
-        assertEquals(moves.size(), 3);
+        assertEquals(3, moves.size());
         assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(4, 6))));
         assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(0, 2))));
         assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(4, 2))));
@@ -183,15 +181,13 @@ public class PieceTest extends TestCase {
         game.stepWithMove(StandardGame.PLAYER_A, 0, 4, 1, 4); // King
         game.stepWithMove(StandardGame.PLAYER_A, 1, 4, 2, 4); // King
         board.print();
-        assertEquals(board.getPiece(2, 4).getIdentifier(), "KING");
-        game.stepWithMove(StandardGame.PLAYER_B, 6, 4, 4, 4); // Pawn
+        assertEquals(board.getPiece(2, 4).getKind(), DefaultPiece.KING.getKind());
+        game.stepWithMove(StandardGame.PLAYER_B, 6, 3, 5, 3); // Pawn
+        game.stepWithMove(StandardGame.PLAYER_B, 5, 3, 4, 4); // Pawn
         game.stepWithMove(StandardGame.PLAYER_B, 4, 4, 3, 4); // Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 2, 4, 3, 4); // P1.King eats P2.Pawn
         game.stepWithMove(StandardGame.PLAYER_A, 3, 4, 2, 4); // P1.King moves back
-        game.stepWithMove(StandardGame.PLAYER_B, 7, 4, 6, 4); // King
-        game.stepWithMove(StandardGame.PLAYER_B, 6, 4, 5, 4); // King
         board.print();
-        assertEquals(board.getPiece(5, 4).getIdentifier(), "KING");
 
         // Print board
         board.print();
@@ -210,4 +206,52 @@ public class PieceTest extends TestCase {
         assertTrue(moves.isEmpty());
     }
 
+    @Test
+    public void testGrasshopper() throws Exception {
+        // Configure board
+        Piece.MoveFunction<RectangleBoard, RectanglePosition> mover = ExtendedPiece.GRASSHOPPER.getMover();
+
+        Set<RectanglePosition> moves;
+        RectanglePosition pos;
+
+        RectangleBoard board = game.getBoard();
+
+        board.addPiece(ExtendedPiece.GRASSHOPPER.newPieceWithTag(StandardGame.PLAYER_B), new RectanglePosition(3, 3));
+
+        game.stepWithMove(StandardGame.PLAYER_A, 1, 5, 3, 5); // Pawn
+
+        // Print board
+        board.print();
+
+        // Move by 1 square
+        moves = mover.apply(new RectanglePosition(3, 3), board, 1);
+        assertEquals(moves.size(), 0);
+        // Move by 2 square
+        moves = mover.apply(new RectanglePosition(3, 3), board, 2);
+        assertEquals(moves.size(), 0);
+        // Move by 3 square
+        moves = mover.apply(new RectanglePosition(3, 3), board, 3);
+        assertEquals(moves.size(), 1);
+        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(3, 6))));
+
+    }
+
+
+    @Test
+    public void testBeroline() throws Exception {
+        // Get a move function
+        Piece.MoveFunction<RectangleBoard, RectanglePosition> mover = ExtendedPiece.BEROLINA.getMover();
+        Set<RectanglePosition> moves;
+        RectanglePosition pos;
+        RectangleBoard board = game.getBoard();
+
+        board.addPiece(ExtendedPiece.BEROLINA.newPieceWithTag(StandardGame.PLAYER_B), new RectanglePosition(3, 3));
+
+        // Move one step
+        moves = mover.apply(new RectanglePosition(3, 3), game.getBoard(), 1);
+        assertEquals(moves.size(), 2);
+        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(2, 4))));
+        assertTrue(moves.stream().anyMatch(x -> x.sameAs(new RectanglePosition(2, 2))));
+
+    }
 }

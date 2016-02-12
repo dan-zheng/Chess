@@ -1,4 +1,4 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -58,8 +58,8 @@ public class GameTest extends TestCase implements GameObserver<RectangleBoard, R
         game.stepWithMove(StandardGame.PLAYER_A, 5, 5, 6, 5);
         assertEquals(Game.State.NORMAL, game.getState());
         Piece p = board.getPiece(6, 5);
-        assertTrue(p.getIdentifier() == "PAWN" && p.getTag() == StandardGame.PLAYER_A);
-        assertEquals(15, board.getPiecesByKind("PAWN").size());
+        assertTrue(p.getKind().equals(DefaultPiece.PAWN.getKind()) && p.getTag() == StandardGame.PLAYER_A);
+        assertEquals(15, board.getPiecesByKind(DefaultPiece.PAWN.getKind()).size());
 
     }
 

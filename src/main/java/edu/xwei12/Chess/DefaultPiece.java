@@ -1,18 +1,17 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by xinranmsn on 1/30/16.
+ * Default pieces for rectangle board + rectangle coordinates
+ * @author Xinran Wei
  */
 public enum DefaultPiece {
 
     /**
-     * Move behavior for King
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the King's possible behaviors (positionSet)
-     *     |                   from (position, board, distance)
+     * Move behavior for King as a lambda function
+     * (position, board, distance) -> positionSet
      */
     KING((RectanglePosition position, RectangleBoard board, Integer distance) -> {
         int x = position.rank, y = position.file;
@@ -35,10 +34,8 @@ public enum DefaultPiece {
     }),
 
     /**
-     * Move behavior for Rook
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the Rook's possible behaviors (positionSet)
-     *     |                   from (position, board, distance)
+     * Move behavior for Rook as a lambda function
+     * (position, board, distance) -> positionSet
      */
     ROOK((RectanglePosition position, RectangleBoard board, Integer distance) -> {
         int x = position.rank, y = position.file;
@@ -54,16 +51,14 @@ public enum DefaultPiece {
         addIfCellValid(position, new RectanglePosition(x - distance, y), board, positionSet);
 
         // Remove leaps
-        positionSet.removeIf(p -> board.needsLeap(position, p));
+        positionSet.removeIf(p -> board.leapsNeeded(position, p) > 0);
 
         return positionSet;
     }),
 
     /**
-     * Move behavior for Bishop
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the Bishop's possible behaviors (positionSet)
-     *     |                     from (position, board, distance)
+     * Move behavior for Bishop as a lambda function
+     * (position, board, distance) -> positionSet
      */
     BISHOP((RectanglePosition position, RectangleBoard board, Integer distance) -> {
         int x = position.rank, y = position.file;
@@ -79,17 +74,14 @@ public enum DefaultPiece {
         addIfCellValid(position, new RectanglePosition(x - distance, y - distance), board, positionSet);
 
         // Remove leaps
-        positionSet.removeIf(p -> board.needsLeap(position, p));
+        positionSet.removeIf(p -> board.leapsNeeded(position, p) > 0);
 
         return positionSet;
     }),
 
     /**
-     * Move behavior for Queen
-     * Magic: Queen = Rook + Bishop
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the Queen's possible behaviors (positionSet)
-     *     |                   from (position, board, distance)
+     * Move behavior for Queen as a lambda function
+     * (position, board, distance) -> positionSet
      */
     QUEEN((RectanglePosition position, RectangleBoard board, Integer distance) -> new HashSet<RectanglePosition>() {{
         addAll(ROOK.getMover().apply(position, board, distance));
@@ -97,10 +89,8 @@ public enum DefaultPiece {
     }}),
 
     /**
-     * Move behavior for Knight
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the Knight's possible behaviors (positionSet)
-     *     |                     from (position, board, distance)
+     * Move behavior for Knight as a lambda function
+     * (position, board, distance) -> positionSet
      */
     KNIGHT((RectanglePosition position, RectangleBoard board, Integer distance) -> {
         int x = position.rank, y = position.file;
@@ -120,23 +110,36 @@ public enum DefaultPiece {
     }),
 
     /**
-     * Move behavior for Pawn
-     * Behavior: (position, board, distance) -> positionSet
-     *     | Derive the Pawn's possible behaviors (positionSet)
-     *     |                   from (position, board, distance)
+     * Move behavior for Pawn as a lambda function
+     * (position, board, distance) -> positionSet
      */
     PAWN((RectanglePosition position, RectangleBoard board, Integer distance) -> {
-
-        // FIXME: Pawn only attacks diagonally
-
         int x = position.rank, y = position.file;
         int ranks = board.getRanks();
         int playerDirection = board.getPiece(x, y).getTag();
         Set<RectanglePosition> positionSet = new HashSet<>();
 
         /* If at initial rank, advance by 2 along the file */
-        if (distance == 1 || (distance == 2 && (x == 1 || x == ranks - 2)))
-            addIfCellValid(position, new RectanglePosition(x + distance * playerDirection, y), board, positionSet);
+        if (distance == 1 || (distance == 2 && (x == 1 || x == ranks - 2))) {
+
+            RectanglePosition forward = new RectanglePosition(x + distance * playerDirection, y);
+            // Does not attack forward
+            if (board.isValidPosition(forward) && !board.pieceExists(forward)) {
+                addIfCellValid(position, forward, board, positionSet);
+            }
+
+            // Attacks diagonally
+            if (distance == 1) {
+                RectanglePosition diagonal1 = new RectanglePosition(x + playerDirection, y + 1);
+                if (board.isValidPosition(diagonal1) && board.pieceExists(diagonal1)) {
+                    addIfCellValid(position, diagonal1, board, positionSet);
+                }
+                RectanglePosition diagonal2 = new RectanglePosition(x + playerDirection, y - 1);
+                if (board.isValidPosition(diagonal2) && board.pieceExists(diagonal2)) {
+                    addIfCellValid(position, diagonal2, board, positionSet);
+                }
+            }
+        }
 
         return positionSet;
     });
@@ -158,7 +161,7 @@ public enum DefaultPiece {
      * @return piece
      */
     public Piece<RectangleBoard, RectanglePosition> newPieceWithTag(int tag) {
-        return new Piece<>(name(), tag, mover);
+        return new Piece<>(name().toLowerCase(), tag, mover);
     }
 
     /**
@@ -170,6 +173,14 @@ public enum DefaultPiece {
     }
 
     /**
+     * Get kind identifier
+     * @return lowercase of enum name as identifier
+     */
+    public String getKind() {
+        return name().toLowerCase();
+    }
+
+    /**
      * Add a position to the set after checking availability of target cell
      * @param fromPosition source position
      * @param toPosition destination position
@@ -178,8 +189,8 @@ public enum DefaultPiece {
      */
     private static void addIfCellValid(RectanglePosition fromPosition, RectanglePosition toPosition, RectangleBoard board, Set<RectanglePosition> positionSet) {
         boolean valid = board.isValidPosition(toPosition) &&       // Destination valid
-                        board.pieceExists(fromPosition) &&         // Source exists
-                        !(board.pieceExists(toPosition) &&         // If destination exists, make sure it's not cannibalism
+                        board.pieceExists(fromPosition)   &&       // Source exists
+                        !(board.pieceExists(toPosition)   &&       // If destination exists, make sure it's not cannibalism
                                 board.getPiece(fromPosition).getTag().equals(board.getPiece(toPosition).getTag()));
 
         if (valid) positionSet.add(toPosition);

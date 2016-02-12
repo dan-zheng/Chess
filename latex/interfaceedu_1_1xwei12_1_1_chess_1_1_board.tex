@@ -1,0 +1,170 @@
+\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board}{}\section{edu.\+xwei12.\+Chess.\+Board$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$ Interface Template Reference}
+\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board}\index{edu.\+xwei12.\+Chess.\+Board$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$@{edu.\+xwei12.\+Chess.\+Board$<$ B extends Board$<$ B, C, C extends Coordinates$<$ C $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Set$<$ C $>$ \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_ab4029d070e024277c7f31137f0825e13}{get\+Pieces\+By\+Kind} (String kind)
+\item 
+Set$<$ C $>$ \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a0eb983cbbc57f91c18491cf82e29e451}{get\+All\+Pieces} ()
+\item 
+boolean \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a1975e57930598526f087a87c417ce788}{is\+Valid\+Position} (C position)
+\item 
+default boolean \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a28aa78a5e6767257b20c5e12fa74afa4}{piece\+Exists} (C position)
+\item 
+void \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a858f17b11b7b0a909f240b5776b35e06}{add\+Piece} (\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece}{Piece}$<$ B, C $>$ piece, C position)
+\item 
+\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece}{Piece}$<$ B, C $>$ \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a83da497f49ab9b4b66974036d91cdcf6}{get\+Piece} (C position)
+\item 
+Set$<$ C $>$ \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a9bb5bbe10001d89727ac69b9f69af96d}{get\+Possible\+Moves} (C position, int distance)
+\item 
+boolean \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_aa5cb738f84553447b59e1ee782f7451a}{can\+Move\+Piece} (C from\+Position, C to\+Position)
+\item 
+boolean \hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a4ff38fd3479c3125613dd50101c5d0ef}{move\+Piece} (C from\+Position, C to\+Position)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!add\+Piece@{add\+Piece}}
+\index{add\+Piece@{add\+Piece}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{add\+Piece(\+Piece$<$ B, C $>$ piece, C position)}{addPiece(Piece< B, C > piece, C position)}}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.add\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Piece}$<$ B, C $>$}]{piece, }
+\item[{C}]{position}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a858f17b11b7b0a909f240b5776b35e06}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a858f17b11b7b0a909f240b5776b35e06}
+Add a piece 
+\begin{DoxyParams}{Parameters}
+{\em piece} & a chess piece \\
+\hline
+{\em position} & position that the piece will be placed at \\
+\hline
+\end{DoxyParams}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!can\+Move\+Piece@{can\+Move\+Piece}}
+\index{can\+Move\+Piece@{can\+Move\+Piece}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{can\+Move\+Piece(\+C from\+Position, C to\+Position)}{canMovePiece(C fromPosition, C toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.can\+Move\+Piece (
+\begin{DoxyParamCaption}
+\item[{C}]{from\+Position, }
+\item[{C}]{to\+Position}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_aa5cb738f84553447b59e1ee782f7451a}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_aa5cb738f84553447b59e1ee782f7451a}
+Determine whether piece can be moved from a position to another 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & source position \\
+\hline
+{\em to\+Position} & destination position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+can or can not 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!get\+All\+Pieces@{get\+All\+Pieces}}
+\index{get\+All\+Pieces@{get\+All\+Pieces}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{get\+All\+Pieces()}{getAllPieces()}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<$C$>$ {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.get\+All\+Pieces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a0eb983cbbc57f91c18491cf82e29e451}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a0eb983cbbc57f91c18491cf82e29e451}
+Get all piece locations \begin{DoxyReturn}{Returns}
+all piece locations 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!get\+Piece@{get\+Piece}}
+\index{get\+Piece@{get\+Piece}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{get\+Piece(\+C position)}{getPiece(C position)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Piece}$<$B, C$>$ {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.get\+Piece (
+\begin{DoxyParamCaption}
+\item[{C}]{position}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a83da497f49ab9b4b66974036d91cdcf6}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a83da497f49ab9b4b66974036d91cdcf6}
+\hyperlink{classedu_1_1xwei12_1_1_chess_1_1_piece}{Piece} at position 
+\begin{DoxyParams}{Parameters}
+{\em position} & position of the piece, dependent on the coordinate system (\hyperlink{interfaceedu_1_1xwei12_1_1_chess_1_1_coordinates}{Coordinates}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+piece or null 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!get\+Pieces\+By\+Kind@{get\+Pieces\+By\+Kind}}
+\index{get\+Pieces\+By\+Kind@{get\+Pieces\+By\+Kind}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{get\+Pieces\+By\+Kind(\+String kind)}{getPiecesByKind(String kind)}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<$C$>$ {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.get\+Pieces\+By\+Kind (
+\begin{DoxyParamCaption}
+\item[{String}]{kind}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_ab4029d070e024277c7f31137f0825e13}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_ab4029d070e024277c7f31137f0825e13}
+Get locations of pieces of a kind 
+\begin{DoxyParams}{Parameters}
+{\em kind} & name of kind \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+piece set 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!get\+Possible\+Moves@{get\+Possible\+Moves}}
+\index{get\+Possible\+Moves@{get\+Possible\+Moves}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{get\+Possible\+Moves(\+C position, int distance)}{getPossibleMoves(C position, int distance)}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<$C$>$ {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.get\+Possible\+Moves (
+\begin{DoxyParamCaption}
+\item[{C}]{position, }
+\item[{int}]{distance}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a9bb5bbe10001d89727ac69b9f69af96d}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a9bb5bbe10001d89727ac69b9f69af96d}
+Get a set of possible moves at distance for the piece at position 
+\begin{DoxyParams}{Parameters}
+{\em position} & source position \\
+\hline
+{\em distance} & distance of move \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position set 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!is\+Valid\+Position@{is\+Valid\+Position}}
+\index{is\+Valid\+Position@{is\+Valid\+Position}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{is\+Valid\+Position(\+C position)}{isValidPosition(C position)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.is\+Valid\+Position (
+\begin{DoxyParamCaption}
+\item[{C}]{position}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a1975e57930598526f087a87c417ce788}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a1975e57930598526f087a87c417ce788}
+Determines if a position is on the board 
+\begin{DoxyParams}{Parameters}
+{\em position} & position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+valid or not 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!move\+Piece@{move\+Piece}}
+\index{move\+Piece@{move\+Piece}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{move\+Piece(\+C from\+Position, C to\+Position)}{movePiece(C fromPosition, C toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.move\+Piece (
+\begin{DoxyParamCaption}
+\item[{C}]{from\+Position, }
+\item[{C}]{to\+Position}
+\end{DoxyParamCaption}
+)}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a4ff38fd3479c3125613dd50101c5d0ef}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a4ff38fd3479c3125613dd50101c5d0ef}
+Move a piece from one position to another, and also attack 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & source position \\
+\hline
+{\em to\+Position} & destination position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+success 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}!piece\+Exists@{piece\+Exists}}
+\index{piece\+Exists@{piece\+Exists}!edu\+::xwei12\+::\+Chess\+::\+Board@{edu\+::xwei12\+::\+Chess\+::\+Board}}
+\subsubsection[{\texorpdfstring{piece\+Exists(\+C position)}{pieceExists(C position)}}]{\setlength{\rightskip}{0pt plus 5cm}default boolean {\bf edu.\+xwei12.\+Chess.\+Board}$<$ B extends {\bf Board}$<$ B, C, C extends {\bf Coordinates}$<$ C $>$.piece\+Exists (
+\begin{DoxyParamCaption}
+\item[{C}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a28aa78a5e6767257b20c5e12fa74afa4}{}\label{interfaceedu_1_1xwei12_1_1_chess_1_1_board_a28aa78a5e6767257b20c5e12fa74afa4}
+Determines if a piece exists at position 
+\begin{DoxyParams}{Parameters}
+{\em position} & position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+exists or not 
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/edu/xwei12/\+Chess/Board.\+java\end{DoxyCompactItemize}

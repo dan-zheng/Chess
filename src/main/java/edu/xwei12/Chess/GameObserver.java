@@ -1,7 +1,8 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 /**
- * Created by xinranmsn on 2/3/16.
+ * Game observer delegation
+ * @author Xinran Wei
  */
 public interface GameObserver<B extends Board<B, C>, C extends Coordinates<C>> {
 
@@ -11,6 +12,4 @@ public interface GameObserver<B extends Board<B, C>, C extends Coordinates<C>> {
      * @param move move
      */
     void onChessGameStateUpdate(Game<B, C> game, Game<B, C>.Move move);
-
-
 }

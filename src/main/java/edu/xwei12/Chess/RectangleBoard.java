@@ -1,13 +1,12 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Chess board class 
- *
+ * @author Xinran Wei
  */
 public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> {
 
@@ -83,15 +82,14 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
         return pieceMap.get(kind);
     }
 
+
     /**
-     * Get all piece locations
-     * @return all piece locations
+     * Get all piece names
+     * @return all kinds of pieces, such as {"pawn", "king", ...}
      */
     @Override
-    public Set<RectanglePosition> getAllPieces() {
-        return pieceMap.entrySet().stream()
-                .flatMap(e -> e.getValue().stream())
-                .collect(Collectors.toSet());
+    public Set<String> getAllPieceKinds() {
+        return pieceMap.keySet();
     }
 
     /**
@@ -125,9 +123,9 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
         cells[position.rank][position.file].piece = piece;
 
         // Add piece to piece map
-        Set<RectanglePosition> set = pieceMap.getOrDefault(piece.getIdentifier(), new HashSet<>());
+        Set<RectanglePosition> set = pieceMap.getOrDefault(piece.getKind(), new HashSet<>());
         set.add(position);
-        pieceMap.put(piece.getIdentifier(), set);
+        pieceMap.put(piece.getKind(), set);
     }
 
     /**
@@ -185,9 +183,9 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
 
         // Modify piece map
         if (!toCell.isEmpty())
-            pieceMap.get(toCell.piece.getIdentifier()).removeIf(x -> x.sameAs(toPosition));
-        pieceMap.get(fromCell.piece.getIdentifier()).removeIf(x -> x.sameAs(fromPosition));
-        pieceMap.get(fromCell.piece.getIdentifier()).add(toPosition);
+            pieceMap.get(toCell.piece.getKind()).removeIf(x -> x.sameAs(toPosition));
+        pieceMap.get(fromCell.piece.getKind()).removeIf(x -> x.sameAs(fromPosition));
+        pieceMap.get(fromCell.piece.getKind()).add(toPosition);
 
         // Modify cells
         toCell.piece = fromCell.piece;
@@ -200,27 +198,52 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
      * Determine whether there's any piece blocking the path from source to destination,
      * i.e., whether a leap is needed
      * @param fromPosition source position
-     * @param toPosition to position
-     * @return whether a leap is needed
+     * @param toPosition destination position
+     * @return number of leaps needed
      */
-    public boolean needsLeap(RectanglePosition fromPosition, RectanglePosition toPosition) {
+    public int leapsNeeded(RectanglePosition fromPosition, RectanglePosition toPosition) {
         int x1 = fromPosition.rank, y1 = fromPosition.file;
         int x2 = toPosition.rank, y2 = toPosition.file;
 
+        int leaps = 0;
+
+        for (RectanglePosition pos = findNearestLeap(fromPosition, toPosition);
+             pos != null && !pos.sameAs(toPosition);
+             pos = findNearestLeap(pos, toPosition)) {
+            leaps++;
+        }
+
+        return leaps;
+    }
+
+
+    /**
+     * Find the first leap from source to destination.
+     * @param fromPosition source position
+     * @param toPosition destination position
+     * @return position of the leap or null
+     */
+    public RectanglePosition findNearestLeap(RectanglePosition fromPosition, RectanglePosition toPosition) {
+        int x1 = fromPosition.rank, y1 = fromPosition.file;
+        int x2 = toPosition.rank, y2 = toPosition.file;
         // Vertical path
         if (x1 == x2)
             for (int y = y1 + 1; y < y2 && y < files; y++)
-                if (!cells[x1][y].isEmpty()) return true;
+                if (!cells[x1][y].isEmpty())
+                    return new RectanglePosition(x1, y);
         // Horizontal path
         if (y1 == y2)
             for (int x = x1 + 1; x < x2 && x < ranks; x++)
-                if (!cells[x][y1].isEmpty()) return true;
+                if (!cells[x][y1].isEmpty())
+                    return new RectanglePosition(x, y1);
         // Diagonal path
-        if (x1 != x2 && y1 != y2)
+        if (Math.abs(x2 - x1) == Math.abs(y2 - y1) && x1 != x2 && y1 != y2)
             for (int x = x1 + 1, y = y1 + 1; x < x2 && x < files && y < ranks; x++, y++)
-                if (!cells[x][y].isEmpty()) return true;
+                if (!cells[x][y].isEmpty())
+                    return new RectanglePosition(x, y);
 
-        return false;
+        // Wrong path
+        return null;
     }
 
     /**
@@ -236,7 +259,7 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
                 Piece<RectangleBoard, RectanglePosition> p = getPiece(i, j);
                 System.out.print(String.format(" %-6s%10s |",
                         "(" + i + "," + j + ")", // position
-                        (p == null ? "" : p.getIdentifier() + (p.getTag() == 1 ? "_P1" : "_P2")) + " ")); // slot
+                        (p == null ? "" : p.getKind() + (p.getTag() == 1 ? "_P1" : "_P2")) + " ")); // slot
             }
             System.out.println();
             System.out.print("|------------------|");

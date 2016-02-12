@@ -1,11 +1,14 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Created by xinranmsn on 1/30/16.
+ * Game base class
+ * @author Xinran Wei
+ * @param <B> Board
+ * @param <C> Coordinate system
  */
 public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
 
@@ -37,6 +40,10 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         return observer;
     }
 
+    public void setObserver(GameObserver<B, C> observer) {
+        this.observer = observer;
+    }
+
     public B getBoard() {
         return board;
     }
@@ -45,9 +52,6 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         return players;
     }
 
-    public void setObserver(GameObserver<B, C> observer) {
-        this.observer = observer;
-    }
 
     protected B board;
 

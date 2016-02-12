@@ -1,7 +1,14 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
+/**
+ * Board base interface
+ * @author Xinran Wei
+ * @param <B> board
+ * @param <C> coordinate system
+ */
 public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
 
     /**
@@ -12,10 +19,20 @@ public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
     Set<C> getPiecesByKind(String kind);
 
     /**
+     * Get all piece names
+     * @return all kinds of pieces, such as {"pawn", "king", ...}
+     */
+    Set<String> getAllPieceKinds();
+
+    /**
      * Get all piece locations
      * @return all piece locations
      */
-    Set<C> getAllPieces();
+    default public Set<C> getAllPieces() {
+        return getAllPieceKinds().stream()
+                .flatMap(e -> getPiecesByKind(e).stream())
+                .collect(Collectors.toSet());
+    }
 
     /**
      * Determines if a position is on the board

@@ -1,14 +1,10 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.Set;
 
 /**
- * Piece.java
- * Created by xinranmsn on 1/31/16.
- */
-
-/**
  * Piece class
+ * @author Xinran Wei
  *
  * Properties:
  *     mover :: (position, board, distance) -> positionSet
@@ -18,12 +14,12 @@ import java.util.Set;
  *
  */
 public class Piece<B extends Board, C extends Coordinates<C>> {
-    public String getIdentifier() {
-        return identifier;
+    public String getKind() {
+        return kind;
     }
 
-    protected void setIdentifier(String identifier) {
-        this.identifier = identifier;
+    protected void setKind(String kind) {
+        this.kind = kind;
     }
 
     public Integer getTag() {
@@ -48,8 +44,8 @@ public class Piece<B extends Board, C extends Coordinates<C>> {
     /** The move function **/
     private MoveFunction<B, C> mover;
 
-    /** Kind identifier **/
-    private String identifier;
+    /** Kind kind **/
+    private String kind;
 
     /** Tag for player info, etc **/
     private Integer tag;
@@ -59,7 +55,7 @@ public class Piece<B extends Board, C extends Coordinates<C>> {
      * @param moveFunction :: (position, board, distance) -> positionSet
      */
     public Piece(String kind, int tag, MoveFunction<B, C> moveFunction) {
-        this.identifier = kind;
+        this.kind = kind;
         this.tag = tag;
         this.mover = moveFunction;
     }

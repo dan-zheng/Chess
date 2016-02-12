@@ -1,11 +1,12 @@
-package edu.xwei12.Chess;
+package edu.xwei12.chess;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by xinranmsn on 2/3/16.
+ * Standard rectangle game
+ * @author Xinran Wei
  */
 public class StandardGame extends Game<RectangleBoard, RectanglePosition> {
 
@@ -17,7 +18,7 @@ public class StandardGame extends Game<RectangleBoard, RectanglePosition> {
     public StandardGame() {
 
         // Initialize a 8x8 board
-        super(new RectangleBoard(8, 8), "KING", defaultPlayers);
+        super(new RectangleBoard(8, 8), DefaultPiece.KING.getKind(), defaultPlayers);
 
         // PAWN
         for (int i = 0; i < 8; i++) {

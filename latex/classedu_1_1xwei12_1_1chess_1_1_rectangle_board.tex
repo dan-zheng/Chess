@@ -1,0 +1,263 @@
+\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}{}\section{edu.\+xwei12.\+chess.\+Rectangle\+Board Class Reference}
+\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}\index{edu.\+xwei12.\+chess.\+Rectangle\+Board@{edu.\+xwei12.\+chess.\+Rectangle\+Board}}
+Inheritance diagram for edu.\+xwei12.\+chess.\+Rectangle\+Board\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries get\+Files} ()\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_abb61689f6b76caa6caf8f5249b75fd78}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_abb61689f6b76caa6caf8f5249b75fd78}
+
+\item 
+int {\bfseries get\+Ranks} ()\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a85ea9a24fc63edc1cbcb077ea46f0ae3}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a85ea9a24fc63edc1cbcb077ea46f0ae3}
+
+\item 
+\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a6406a4cfbabca7c41bcdcd9165764df0}{Rectangle\+Board} (int ranks, int files)
+\item 
+Set$<$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} $>$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a74cb08b9090a40990661e9283438d937}{get\+Pieces\+By\+Kind} (String kind)
+\item 
+Set$<$ String $>$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ab89613a1fa0c7178a6108a1ec7c3962b}{get\+All\+Piece\+Kinds} ()
+\item 
+boolean \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_afd744749597e097cac2f9ab7abe7064d}{is\+Valid\+Position} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} position)
+\item 
+\hyperlink{classedu_1_1xwei12_1_1chess_1_1_piece}{Piece}$<$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}{Rectangle\+Board}, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} $>$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a4992efb221dfa1811e6b053ec91e3407}{get\+Piece} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} position)
+\item 
+void \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a629a12594a3edc1a33d88e4955591e48}{add\+Piece} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_piece}{Piece}$<$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}{Rectangle\+Board}, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} $>$ piece, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} position)
+\item 
+Set$<$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} $>$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aebbe5e735c0759383c8407d964e1293e}{get\+Possible\+Moves} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} position, int distance)
+\item 
+boolean \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a65d288f3b314eb4efd80a85c95a556cd}{can\+Move\+Piece} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} from\+Position, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} to\+Position)
+\item 
+boolean \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a476071ffa5222be6ea71f3fb82b7b8ff}{move\+Piece} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} from\+Position, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} to\+Position)
+\item 
+int \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aeab8a752a9ea5b21569eff6decb53fd7}{leaps\+Needed} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} from\+Position, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} to\+Position)
+\item 
+\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ac0e3b5328b0ff0ac5dbc39688817da8c}{find\+Nearest\+Leap} (\hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} from\+Position, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} to\+Position)
+\item 
+void \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a2c0f4bdf89ab070895f93923774eb4ae}{print} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classedu_1_1xwei12_1_1chess_1_1_piece}{Piece}$<$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board}{Rectangle\+Board}, \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_position}{Rectangle\+Position} $>$ \hyperlink{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a37e604e5a748f3d6fdeef458fb865049}{get\+Piece} (int rank, int file)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Chess board class \begin{DoxyAuthor}{Author}
+Xinran Wei 
+\end{DoxyAuthor}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!Rectangle\+Board@{Rectangle\+Board}}
+\index{Rectangle\+Board@{Rectangle\+Board}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{Rectangle\+Board(int ranks, int files)}{RectangleBoard(int ranks, int files)}}]{\setlength{\rightskip}{0pt plus 5cm}edu.\+xwei12.\+chess.\+Rectangle\+Board.\+Rectangle\+Board (
+\begin{DoxyParamCaption}
+\item[{int}]{ranks, }
+\item[{int}]{files}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a6406a4cfbabca7c41bcdcd9165764df0}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a6406a4cfbabca7c41bcdcd9165764df0}
+Construct a board with dimensions 
+\begin{DoxyParams}{Parameters}
+{\em ranks} & number of ranks \\
+\hline
+{\em files} & number of files \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!add\+Piece@{add\+Piece}}
+\index{add\+Piece@{add\+Piece}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{add\+Piece(\+Piece$<$ Rectangle\+Board, Rectangle\+Position $>$ piece, Rectangle\+Position position)}{addPiece(Piece< RectangleBoard, RectanglePosition > piece, RectanglePosition position)}}]{\setlength{\rightskip}{0pt plus 5cm}void edu.\+xwei12.\+chess.\+Rectangle\+Board.\+add\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Piece}$<$ {\bf Rectangle\+Board}, {\bf Rectangle\+Position} $>$}]{piece, }
+\item[{{\bf Rectangle\+Position}}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a629a12594a3edc1a33d88e4955591e48}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a629a12594a3edc1a33d88e4955591e48}
+Add a piece 
+\begin{DoxyParams}{Parameters}
+{\em piece} & a chess piece \\
+\hline
+{\em position} & position that the piece will be placed at \\
+\hline
+\end{DoxyParams}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!can\+Move\+Piece@{can\+Move\+Piece}}
+\index{can\+Move\+Piece@{can\+Move\+Piece}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{can\+Move\+Piece(\+Rectangle\+Position from\+Position, Rectangle\+Position to\+Position)}{canMovePiece(RectanglePosition fromPosition, RectanglePosition toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean edu.\+xwei12.\+chess.\+Rectangle\+Board.\+can\+Move\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{from\+Position, }
+\item[{{\bf Rectangle\+Position}}]{to\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a65d288f3b314eb4efd80a85c95a556cd}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a65d288f3b314eb4efd80a85c95a556cd}
+Determine whether piece can be moved from a position to another 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & source position \\
+\hline
+{\em to\+Position} & destination position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+can or can not 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!find\+Nearest\+Leap@{find\+Nearest\+Leap}}
+\index{find\+Nearest\+Leap@{find\+Nearest\+Leap}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{find\+Nearest\+Leap(\+Rectangle\+Position from\+Position, Rectangle\+Position to\+Position)}{findNearestLeap(RectanglePosition fromPosition, RectanglePosition toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Rectangle\+Position} edu.\+xwei12.\+chess.\+Rectangle\+Board.\+find\+Nearest\+Leap (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{from\+Position, }
+\item[{{\bf Rectangle\+Position}}]{to\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ac0e3b5328b0ff0ac5dbc39688817da8c}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ac0e3b5328b0ff0ac5dbc39688817da8c}
+Find the first leap from source to destination. 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & source position \\
+\hline
+{\em to\+Position} & destination position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position of the leap or null 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!get\+All\+Piece\+Kinds@{get\+All\+Piece\+Kinds}}
+\index{get\+All\+Piece\+Kinds@{get\+All\+Piece\+Kinds}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{get\+All\+Piece\+Kinds()}{getAllPieceKinds()}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<$String$>$ edu.\+xwei12.\+chess.\+Rectangle\+Board.\+get\+All\+Piece\+Kinds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ab89613a1fa0c7178a6108a1ec7c3962b}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_ab89613a1fa0c7178a6108a1ec7c3962b}
+Get all piece names \begin{DoxyReturn}{Returns}
+all kinds of pieces, such as \{\char`\"{}pawn\char`\"{}, \char`\"{}king\char`\"{}, ...\} 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!get\+Piece@{get\+Piece}}
+\index{get\+Piece@{get\+Piece}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{get\+Piece(int rank, int file)}{getPiece(int rank, int file)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Piece}$<${\bf Rectangle\+Board}, {\bf Rectangle\+Position}$>$ edu.\+xwei12.\+chess.\+Rectangle\+Board.\+get\+Piece (
+\begin{DoxyParamCaption}
+\item[{int}]{rank, }
+\item[{int}]{file}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a37e604e5a748f3d6fdeef458fb865049}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a37e604e5a748f3d6fdeef458fb865049}
+Get piece at (rank, file) 
+\begin{DoxyParams}{Parameters}
+{\em rank} & rank-\/coordinate \\
+\hline
+{\em file} & file-\/coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cell 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!get\+Piece@{get\+Piece}}
+\index{get\+Piece@{get\+Piece}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{get\+Piece(\+Rectangle\+Position position)}{getPiece(RectanglePosition position)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Piece}$<${\bf Rectangle\+Board}, {\bf Rectangle\+Position}$>$ edu.\+xwei12.\+chess.\+Rectangle\+Board.\+get\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a4992efb221dfa1811e6b053ec91e3407}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a4992efb221dfa1811e6b053ec91e3407}
+\hyperlink{classedu_1_1xwei12_1_1chess_1_1_piece}{Piece} at position 
+\begin{DoxyParams}{Parameters}
+{\em position} & position of the piece, dependent on the coordinate system (\hyperlink{interfaceedu_1_1xwei12_1_1chess_1_1_coordinates}{Coordinates}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+piece or null 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!get\+Pieces\+By\+Kind@{get\+Pieces\+By\+Kind}}
+\index{get\+Pieces\+By\+Kind@{get\+Pieces\+By\+Kind}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{get\+Pieces\+By\+Kind(\+String kind)}{getPiecesByKind(String kind)}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Rectangle\+Position}$>$ edu.\+xwei12.\+chess.\+Rectangle\+Board.\+get\+Pieces\+By\+Kind (
+\begin{DoxyParamCaption}
+\item[{String}]{kind}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a74cb08b9090a40990661e9283438d937}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a74cb08b9090a40990661e9283438d937}
+Get locations of pieces of a kind 
+\begin{DoxyParams}{Parameters}
+{\em kind} & name of the kind \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+piece set 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!get\+Possible\+Moves@{get\+Possible\+Moves}}
+\index{get\+Possible\+Moves@{get\+Possible\+Moves}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{get\+Possible\+Moves(\+Rectangle\+Position position, int distance)}{getPossibleMoves(RectanglePosition position, int distance)}}]{\setlength{\rightskip}{0pt plus 5cm}Set$<${\bf Rectangle\+Position}$>$ edu.\+xwei12.\+chess.\+Rectangle\+Board.\+get\+Possible\+Moves (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{position, }
+\item[{int}]{distance}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aebbe5e735c0759383c8407d964e1293e}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aebbe5e735c0759383c8407d964e1293e}
+Get a set of possible moves at distance for the piece at position 
+\begin{DoxyParams}{Parameters}
+{\em position} & source position \\
+\hline
+{\em distance} & distance of move \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position set 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!is\+Valid\+Position@{is\+Valid\+Position}}
+\index{is\+Valid\+Position@{is\+Valid\+Position}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{is\+Valid\+Position(\+Rectangle\+Position position)}{isValidPosition(RectanglePosition position)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean edu.\+xwei12.\+chess.\+Rectangle\+Board.\+is\+Valid\+Position (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_afd744749597e097cac2f9ab7abe7064d}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_afd744749597e097cac2f9ab7abe7064d}
+Determines if a position is on the board 
+\begin{DoxyParams}{Parameters}
+{\em position} & position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+valid or not 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!leaps\+Needed@{leaps\+Needed}}
+\index{leaps\+Needed@{leaps\+Needed}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{leaps\+Needed(\+Rectangle\+Position from\+Position, Rectangle\+Position to\+Position)}{leapsNeeded(RectanglePosition fromPosition, RectanglePosition toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}int edu.\+xwei12.\+chess.\+Rectangle\+Board.\+leaps\+Needed (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{from\+Position, }
+\item[{{\bf Rectangle\+Position}}]{to\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aeab8a752a9ea5b21569eff6decb53fd7}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_aeab8a752a9ea5b21569eff6decb53fd7}
+Determine whether there\textquotesingle{}s any piece blocking the path from source to destination, i.\+e., whether a leap is needed 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & source position \\
+\hline
+{\em to\+Position} & destination position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of leaps needed 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!move\+Piece@{move\+Piece}}
+\index{move\+Piece@{move\+Piece}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{move\+Piece(\+Rectangle\+Position from\+Position, Rectangle\+Position to\+Position)}{movePiece(RectanglePosition fromPosition, RectanglePosition toPosition)}}]{\setlength{\rightskip}{0pt plus 5cm}boolean edu.\+xwei12.\+chess.\+Rectangle\+Board.\+move\+Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Rectangle\+Position}}]{from\+Position, }
+\item[{{\bf Rectangle\+Position}}]{to\+Position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a476071ffa5222be6ea71f3fb82b7b8ff}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a476071ffa5222be6ea71f3fb82b7b8ff}
+Move a piece from one position to another, and also attacks 
+\begin{DoxyParams}{Parameters}
+{\em from\+Position} & current position of piece \\
+\hline
+{\em to\+Position} & of movement \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+success 
+\end{DoxyReturn}
+\index{edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}!print@{print}}
+\index{print@{print}!edu\+::xwei12\+::chess\+::\+Rectangle\+Board@{edu\+::xwei12\+::chess\+::\+Rectangle\+Board}}
+\subsubsection[{\texorpdfstring{print()}{print()}}]{\setlength{\rightskip}{0pt plus 5cm}void edu.\+xwei12.\+chess.\+Rectangle\+Board.\+print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a2c0f4bdf89ab070895f93923774eb4ae}{}\label{classedu_1_1xwei12_1_1chess_1_1_rectangle_board_a2c0f4bdf89ab070895f93923774eb4ae}
+Print chess board (helper) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/edu/xwei12/chess/Rectangle\+Board.\+java\end{DoxyCompactItemize}
