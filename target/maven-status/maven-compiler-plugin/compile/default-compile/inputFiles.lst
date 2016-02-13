@@ -1,2 +1,11 @@
-/Users/xinranmsn/Dropbox/Documents/Illinois/Courses/cs242/Assignment1.0/src/main/java/edu/xwei12/App.java
-/Users/xinranmsn/Dropbox/Documents/Illinois/Courses/cs242/Assignment1.0/src/main/java/edu/xwei12/Board.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/Board.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/RectangleBoard.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/Game.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/Piece.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/GameObserver.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/StandardGame.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/Coordinates.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/RectanglePosition.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/DefaultPiece.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/ExtendedPiece.java
+/Users/xinranmsn/Development/General/Chess/src/main/java/edu/xwei12/chess/gui/AppController.java
