@@ -2,6 +2,7 @@ package edu.xwei12.chess;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
@@ -12,10 +13,13 @@ import java.util.stream.Collectors;
  */
 public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
 
+
+
     public class Move {
         public Integer player;
         public C source;
         public C destination;
+        public boolean attacks;
 
         public Move(Integer player, C source, C destination) {
             this.player = player;
@@ -25,7 +29,7 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     }
 
     public Move getLastMove() {
-        return lastMove;
+        return moveHistory.peek();
     }
 
     public enum State {
@@ -52,6 +56,13 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         return players;
     }
 
+    public Integer getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(Integer playerTurn) {
+        this.playerTurn = playerTurn;
+    }
 
     protected B board;
 
@@ -59,7 +70,8 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     private GameObserver<B, C> observer = null;
     private Set<Integer> players;
     private String kingPieceKind;
-    private Move lastMove;
+    private Stack<Move> moveHistory = null;
+    private Integer playerTurn = 0;
 
 
     /**
@@ -72,6 +84,9 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         this.board = board;
         this.kingPieceKind = kingPieceKind;
         this.players = players;
+        moveHistory = new Stack<>();
+
+        initialize();
     }
 
     /**
@@ -93,11 +108,49 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     public boolean stepWithMove(Move move) {
         if (state == State.CHECKMATE) return false;
         Piece p = board.getPiece(move.source);
-        if (p == null || p.getTag() != move.player) return false;
+        if (p == null || !p.getTag().equals(move.player)) return false;
+
+        // Set attacks flag
+        move.attacks = board.pieceExists(move.destination);
 
         boolean moved = board.movePiece(move.source, move.destination);
         if (moved) updateState(move);
         return moved;
+    }
+
+    /**
+     * Update player turn
+     */
+    public abstract void updateTurn();
+
+    /**
+     * Initialize game
+     */
+    protected abstract void initialize();
+
+    /**
+     * Undo by 1 move
+     * @return success
+     */
+    public boolean undo() {
+        if (moveHistory.isEmpty()) return false;
+
+        // Move back
+        Move move = moveHistory.pop();
+        Integer player = move.player;
+        C lastSrc = move.source;
+        C lastDest = move.destination;
+        board.movePiece(lastDest, lastSrc);
+        return true;
+    }
+
+    /**
+     * Restart game
+     */
+    public void restart() {
+        moveHistory.removeAllElements();
+        board.removeAllPieces();
+        initialize();
     }
 
     /**
@@ -107,7 +160,10 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     protected void updateState(Move move) {
         state = State.NORMAL;
 
-        lastMove = move;
+        moveHistory.push(move);
+
+        // Update player turn
+        updateTurn();
 
         // Set of Kings
         Set<C> kingPositions = board.getPiecesByKind(kingPieceKind).stream()
@@ -117,7 +173,7 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         Optional<C> defeater = board.getAllPieces().stream()
                 .filter(x -> kingPositions.stream()
                         .anyMatch(y -> board.canMovePiece(x, y)))
-                .filter(x -> (lastMove == null) || !lastMove.player.equals(board.getPiece(x).getTag()))
+                .filter(x -> (moveHistory.isEmpty()) || !getLastMove().player.equals(board.getPiece(x).getTag()))
                 .findFirst();
 
         // Found defeater!

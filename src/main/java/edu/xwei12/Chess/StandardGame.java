@@ -12,14 +12,17 @@ public class StandardGame extends Game<RectangleBoard, RectanglePosition> {
 
     public static final int PLAYER_A = 1;
     public static final int PLAYER_B = -1;
+    public static final int PLAYER_DEFAULT = 0;
 
     private static Set<Integer> defaultPlayers = new HashSet<>(Arrays.asList(PLAYER_A, PLAYER_B));
 
     public StandardGame() {
-
         // Initialize a 8x8 board
         super(new RectangleBoard(8, 8), DefaultPiece.KING.getKind(), defaultPlayers);
+    }
 
+    @Override
+    protected void initialize() {
         // PAWN
         for (int i = 0; i < 8; i++) {
             board.addPiece(DefaultPiece.PAWN.newPieceWithTag(PLAYER_A), new RectanglePosition(1, i));
@@ -52,7 +55,6 @@ public class StandardGame extends Game<RectangleBoard, RectanglePosition> {
         board.addPiece(DefaultPiece.ROOK.newPieceWithTag(PLAYER_A), new RectanglePosition(0, 7));
         board.addPiece(DefaultPiece.ROOK.newPieceWithTag(PLAYER_B), new RectanglePosition(7, 0));
         board.addPiece(DefaultPiece.ROOK.newPieceWithTag(PLAYER_B), new RectanglePosition(7, 7));
-
     }
 
     /**
@@ -68,5 +70,13 @@ public class StandardGame extends Game<RectangleBoard, RectanglePosition> {
         return stepWithMove(player, new RectanglePosition(fromX, fromY), new RectanglePosition(toX, toY));
     }
 
+    /**
+     * Update player turn
+     */
+    @Override
+    public void updateTurn() {
+        Integer lastPlayer = getLastMove().player;
+        setPlayerTurn(-lastPlayer);
+    }
 
 }

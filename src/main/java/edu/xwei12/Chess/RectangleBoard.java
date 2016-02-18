@@ -1,5 +1,6 @@
 package edu.xwei12.chess;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -111,6 +112,15 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
     @Override
     public Piece<RectangleBoard, RectanglePosition> getPiece(RectanglePosition position) {
         return cells[position.rank][position.file].piece;
+    }
+
+    /**
+     * Remove all pieces
+     */
+    @Override
+    public void removeAllPieces() {
+        Arrays.stream(cells).forEach(rank -> Arrays.stream(rank).forEach(cell -> cell.piece = null));
+        pieceMap.forEach((type, set) -> set.clear());
     }
 
     /**

@@ -1,13 +1,7 @@
 package edu.xwei12.chess.gui;
 
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import org.junit.*;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * Test GUI
@@ -17,20 +11,21 @@ public class GUITest {
 
     AppController controller;
 
-    @BeforeClass
-    public void setUpClass() throws InterruptedException {
-        Thread t = new Thread("JavaFX_init") {
-            public void run() {
-                AppController.launch(AppController.class);
-            }
-        };
-        t.setDaemon(true);
-        t.start();
-        Thread.sleep(500);
-    }
+//    @BeforeClass
+//    public static void setUpClass() throws InterruptedException {
+//        Thread t = new Thread("JavaFX_init") {
+//            public void run() {
+//                AppController.launch(AppController.class);
+//            }
+//        };
+//        t.setDaemon(true);
+//        t.start();
+//        Thread.sleep(500);
+//    }
 
     @Before
     public void setUp() throws Exception {
+        controller = new AppController();
     }
 
     @After
@@ -38,6 +33,7 @@ public class GUITest {
 
     }
 
+    /*
     @Test
     public void testStart() throws Exception {
         Assert.assertTrue(validateSnapshot(controller.snapshot(), "start-snapshot.png"));
@@ -58,4 +54,5 @@ public class GUITest {
         File file = new File("start-snapshot.png");
         ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", file);
     }
+    */
 }

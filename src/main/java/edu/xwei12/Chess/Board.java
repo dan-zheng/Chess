@@ -28,7 +28,7 @@ public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
      * Get all piece locations
      * @return all piece locations
      */
-    default public Set<C> getAllPieces() {
+    default Set<C> getAllPieces() {
         return getAllPieceKinds().stream()
                 .flatMap(e -> getPiecesByKind(e).stream())
                 .collect(Collectors.toSet());
@@ -65,6 +65,11 @@ public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
     Piece<B, C> getPiece(C position);
 
     /**
+     * Remove all pieces
+     */
+    void removeAllPieces();
+
+    /**
      * Get a set of possible moves at distance for the piece at position
      * @param position source position
      * @param distance distance of move
@@ -87,4 +92,5 @@ public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
      * @return success
      */
     boolean movePiece(C fromPosition, C toPosition);
+
 }
