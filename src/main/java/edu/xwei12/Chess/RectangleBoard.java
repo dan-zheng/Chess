@@ -181,12 +181,11 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
      * Move a piece from one position to another, and also attacks
      * @param fromPosition current position of piece
      * @param toPosition of movement
-     * @return success
      */
     @Override
-    public boolean movePiece(RectanglePosition fromPosition, RectanglePosition toPosition) {
+    public void movePiece(RectanglePosition fromPosition, RectanglePosition toPosition) {
 
-        if (!canMovePiece(fromPosition, toPosition)) return false;
+//        if (!canMovePiece(fromPosition, toPosition)) return false;
 
         Cell fromCell = cells[fromPosition.rank][fromPosition.file];
         Cell toCell = cells[toPosition.rank][toPosition.file];
@@ -200,8 +199,6 @@ public class RectangleBoard implements Board<RectangleBoard, RectanglePosition> 
         // Modify cells
         toCell.piece = fromCell.piece;
         fromCell.piece = null;
-
-        return true;
     }
 
     /**

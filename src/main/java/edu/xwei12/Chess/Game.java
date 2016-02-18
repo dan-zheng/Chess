@@ -13,13 +13,12 @@ import java.util.stream.Collectors;
  */
 public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
 
-
-
     public class Move {
         public Integer player;
         public C source;
         public C destination;
         public boolean attacks;
+        public Piece<B, C> victim;
 
         public Move(Integer player, C source, C destination) {
             this.player = player;
@@ -29,7 +28,7 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     }
 
     public Move getLastMove() {
-        return moveHistory.peek();
+        return moveHistory.isEmpty() ? null : moveHistory.peek();
     }
 
     public enum State {
@@ -63,28 +62,43 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     public void setPlayerTurn(Integer playerTurn) {
         this.playerTurn = playerTurn;
     }
+    public String getCriticalPieceKind() {
+        return criticalPieceKind;
+    }
+
+    public C getDefeaterPosition() {
+        return defeaterPosition;
+    }
+
+    public ScoreManager getScoreManager() {
+        return scoreManager;
+    }
 
     protected B board;
 
     private State state = State.NORMAL;
     private GameObserver<B, C> observer = null;
     private Set<Integer> players;
-    private String kingPieceKind;
+    private String criticalPieceKind;
     private Stack<Move> moveHistory = null;
     private Integer playerTurn = 0;
+    private C defeaterPosition = null;
+
+    private ScoreManager scoreManager;
 
 
     /**
      * Initialize with a board
      * @param board chess board
-     * @param kingPieceKind the kind of piece to determine checkmate
+     * @param criticalPieceKind the kind of piece to determine checkmate
      * @param players set of player tags
      */
-    public Game(B board, String kingPieceKind, Set<Integer> players) {
+    public Game(B board, String criticalPieceKind, Set<Integer> players) {
         this.board = board;
-        this.kingPieceKind = kingPieceKind;
+        this.criticalPieceKind = criticalPieceKind;
         this.players = players;
         moveHistory = new Stack<>();
+        scoreManager = new ScoreManager();
 
         initialize();
     }
@@ -110,12 +124,18 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         Piece p = board.getPiece(move.source);
         if (p == null || !p.getTag().equals(move.player)) return false;
 
-        // Set attacks flag
+        // Set victim
         move.attacks = board.pieceExists(move.destination);
+        move.victim = board.getPiece(move.destination);
 
-        boolean moved = board.movePiece(move.source, move.destination);
-        if (moved) updateState(move);
-        return moved;
+
+        if (board.canMovePiece(move.source, move.destination)) {
+            board.movePiece(move.source, move.destination);
+            updateState(move);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -141,6 +161,23 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         C lastSrc = move.source;
         C lastDest = move.destination;
         board.movePiece(lastDest, lastSrc);
+
+        // Add piece back
+        if (move.attacks)
+            board.addPiece(move.victim, lastDest);
+
+        // Reset player turn
+        playerTurn = move.player;
+
+        // Restore score if checkmated
+        if (state == State.CHECKMATE) {
+            scoreManager.lower(board.getPiece(defeaterPosition).getTag(), 1);
+            defeaterPosition = null;
+        }
+
+        // Reset state
+        state = State.NORMAL;
+
         return true;
     }
 
@@ -150,7 +187,12 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
     public void restart() {
         moveHistory.removeAllElements();
         board.removeAllPieces();
+        // Reinitialize board
         initialize();
+        // Reset turn
+        playerTurn = 0;
+        // Reset state
+        state = State.NORMAL;
     }
 
     /**
@@ -166,7 +208,7 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
         updateTurn();
 
         // Set of Kings
-        Set<C> kingPositions = board.getPiecesByKind(kingPieceKind).stream()
+        Set<C> kingPositions = board.getPiecesByKind(criticalPieceKind).stream()
                 .collect(Collectors.toSet());
 
         // Find the piece that can attack the King!
@@ -178,7 +220,9 @@ public abstract class Game<B extends Board<B, C>, C extends Coordinates<C>> {
 
         // Found defeater!
         if (kingPositions.size() < 2 || defeater.isPresent()) {
+            defeaterPosition = defeater.get();
             state = State.CHECKMATE;
+            scoreManager.raise(board.getPiece(defeater.get()).getTag(), 1);
         }
 
         // Notify observer

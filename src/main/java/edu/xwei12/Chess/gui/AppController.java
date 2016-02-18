@@ -2,20 +2,26 @@ package edu.xwei12.chess.gui;
 
 import edu.xwei12.chess.*;
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 /**
@@ -39,10 +45,14 @@ public class AppController extends Application implements GameObserver<Rectangle
     private HashMap<RectanglePosition, Image> pieceImageMap;
     /* Board image view */
     private ImageView boardView;
-    /* Guide layer */
-    private GuideLayer guideLayer;
     /* Primary stage */
     private Stage primaryStage;
+    /* Player name property */
+    private StringProperty playerProperty;
+    /* Player A score property */
+    private IntegerProperty scoreAProperty;
+    /* Player B score property */
+    private IntegerProperty scoreBProperty;
 
     /** Interaction control **/
     /* Interaction state */
@@ -60,16 +70,15 @@ public class AppController extends Application implements GameObserver<Rectangle
         state = State.STANDBY;
         inducerPosition = null;
 
+        addCustomPieces();
+
         Set<RectanglePosition> pieces = board.getAllPieces();
         pieceImageMap = new HashMap<>(pieces.size());
 
         // Load all piece images
         pieces.forEach(p -> {
             Piece piece = board.getPiece(p);
-            String playerSuffix = piece.getTag() == StandardGame.PLAYER_A ? "-a.png" : "-b.png";
-            String path = "/pieces/" + piece.getKind() + playerSuffix;
-            Image image = new Image(getClass().getResourceAsStream(path));
-            pieceImageMap.put(p, image);
+            pieceImageMap.put(p, getImageForPiece(piece));
         });
     }
 
@@ -80,30 +89,87 @@ public class AppController extends Application implements GameObserver<Rectangle
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        Group root = new Group();
-        final int WINDOW_SIZE_Y = 500, WINDOW_SIZE_X = 500;
+        Pane root = new Pane();
+        final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 500;
+        final int BOARD_WIDTH = 500, BOARD_HEIGHT = 500;
 
         // Initialize window
-        primaryStage.setScene(new Scene(root, WINDOW_SIZE_X, WINDOW_SIZE_Y));
+        primaryStage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT));
         primaryStage.setTitle("Chess");
         primaryStage.setResizable(false);
 
-        // Board image view
-        boardView = new ImageView(new Image(getClass().getResourceAsStream("/board/rectangle-board.png")));
-        boardView.setFitWidth(WINDOW_SIZE_X);
-        boardView.setFitHeight(WINDOW_SIZE_Y);
-        boardView.setCache(true);
-        boardView.setSmooth(true);
-        boardView.setOpacity(0.1);
-        boardView.setId("board");
-        boardView.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBoardClicked);
-        root.getChildren().add(boardView);
+        // Initialize properties
+        playerProperty = new SimpleStringProperty("Any");
+        scoreAProperty = new SimpleIntegerProperty();
+        scoreBProperty = new SimpleIntegerProperty();
+        // Update scores
+        ScoreManager scoreManager = game.getScoreManager();
+        scoreAProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_A));
+        scoreBProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_B));
 
-        // Add guide layer
-        double unitWidth = boardView.getFitWidth() / board.getFiles();
-        double unitHeight = boardView.getFitHeight() / board.getRanks();
-        guideLayer = new GuideLayer(unitWidth, unitHeight);
-        // TODO: decide whether or not to use Guide Layer!!!
+        // Set background color
+        root.setStyle("fx-background-color: #f2f2f2");
+
+        /* Add labels */
+        // Turn label
+        Label turnLabel = new Label("Turn:") {{
+            setFont(Font.font(20));
+            setLayoutX(540);
+            setLayoutY(100);
+        }};
+        root.getChildren().add(turnLabel);
+        // Player label
+        Label playerLabel = new Label() {{
+            setLayoutX(540);
+            setLayoutY(120);
+            textProperty().bind(playerProperty);
+            setFont(Font.font(40));
+        }};
+        root.getChildren().add(playerLabel);
+        // Score A label
+        Label scoreALabel = new Label() {{
+            setFont(Font.font(35));
+            setLayoutX(540);
+            setLayoutY(200);
+            textProperty().bindBidirectional(scoreAProperty, new NumberStringConverter());
+        }};
+        root.getChildren().add(scoreALabel);
+        // Score B label
+        Label scoreBLabel = new Label() {{
+            setFont(Font.font(35));
+            setLayoutX(540);
+            setLayoutY(260);
+            textProperty().bindBidirectional(scoreBProperty, new NumberStringConverter());
+        }};
+        root.getChildren().add(scoreBLabel);
+
+        /* Add buttons */
+        // Restart button
+        Button restartButton = new Button("Restart Game") {{
+            setLayoutX(550);
+            setLayoutY(400);
+            addEventHandler(MouseEvent.MOUSE_CLICKED, x -> restart());
+        }};
+        root.getChildren().add(restartButton);
+        // Undo button
+        Button undoButton = new Button("Undo") {{
+            setLayoutX(550);
+            setLayoutY(360);
+            addEventHandler(MouseEvent.MOUSE_CLICKED, x -> undo());
+        }};
+        root.getChildren().add(undoButton);
+
+        // Board image view
+        boardView = new ImageView(new Image(getClass().getResourceAsStream("/board/rectangle-board.png"))) {{
+            setFitWidth(BOARD_WIDTH);
+            setFitHeight(BOARD_HEIGHT);
+            setCache(true);
+            setSmooth(true);
+            setOpacity(0.1);
+            setId("board");
+            addEventFilter(MouseEvent.MOUSE_CLICKED, x -> onBoardClicked(x));
+        }};
+        root.getChildren().add(boardView);
 
         initializePieces();
 
@@ -112,39 +178,103 @@ public class AppController extends Application implements GameObserver<Rectangle
     }
 
     /**
+     * Add custom pieces to the board
+     */
+    void addCustomPieces() {
+        board.addPiece(ExtendedPiece.GRASSHOPPER.newPieceWithTag(StandardGame.PLAYER_A), new RectanglePosition(2, 2));
+        board.addPiece(ExtendedPiece.GRASSHOPPER.newPieceWithTag(StandardGame.PLAYER_B), new RectanglePosition(5, 2));
+        board.addPiece(ExtendedPiece.BEROLINA.newPieceWithTag(StandardGame.PLAYER_A), new RectanglePosition(2, 5));
+        board.addPiece(ExtendedPiece.BEROLINA.newPieceWithTag(StandardGame.PLAYER_B), new RectanglePosition(5, 5));
+    }
+
+    /**
      * Initialize piece positions
      */
     void initializePieces() {
-        Group root = (Group)primaryStage.getScene().getRoot();
-
         // Add each piece to the scene
-        pieceImageMap.forEach((pos, img) -> {
-            Point2D coords = getGraphicalCoordinates(pos);
-            ImageView view = new ImageView(img);
-            view.setFitWidth(boardView.getFitWidth() / board.getFiles());
-            view.setFitHeight(boardView.getFitHeight() / board.getRanks());
-            view.setX(coords.getX());
-            view.setY(coords.getY());
+        pieceImageMap.forEach(this::addPiece);
+    }
 
+    /**
+     * Add piece
+     */
+    void addPiece(RectanglePosition pos, Image img) {
+        Pane root = (Pane)primaryStage.getScene().getRoot();
+        Point2D coords = getGraphicalCoordinates(pos);
+        ImageView view = new ImageView(img) {{
+            setFitWidth(boardView.getFitWidth() / board.getFiles());
+            setFitHeight(boardView.getFitHeight() / board.getRanks());
+            setX(coords.getX());
+            setY(coords.getY());
             // let onPieceClicked handle event
-            view.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onPieceClicked);
-
+            addEventFilter(MouseEvent.MOUSE_CLICKED, x -> onPieceClicked(x));
             // set ID for each image view
-            view.setId(generatePieceID(pos));
+            setId(generatePieceID(pos));
+        }};
+        root.getChildren().add(view);
+    }
 
-            root.getChildren().add(view);
-        });
+    /**
+     * Load a image for piece
+     * @param piece piece instance
+     * @return image
+     */
+    private Image getImageForPiece(Piece piece) {
+        String playerSuffix = piece.getTag() == StandardGame.PLAYER_A ? "-a.png" : "-b.png";
+        String path = "/pieces/" + piece.getKind() + playerSuffix;
+        return new Image(getClass().getResourceAsStream(path));
     }
 
     /**
      * Restart game
      */
     void restart() {
-        Group root = (Group)primaryStage.getScene().getRoot();
+        Pane root = (Pane)primaryStage.getScene().getRoot();
+        game.restart();
         // Remove all piece nodes
-        root.getChildren().removeIf(x -> x.getId().startsWith("piece"));
+        root.getChildren().removeIf(x -> x.getId() != null && x.getId().startsWith("piece"));
+        // Re-add custom pieces
+        addCustomPieces();
         // Initialize pieces
         initializePieces();
+        // Reset player
+        playerProperty.setValue("Any");
+        // Reset state
+        state = State.STANDBY;
+    }
+
+    /**
+     * Undo
+     */
+    void undo() {
+        StandardGame.Move move = game.getLastMove();
+        if (move == null) return;
+        game.undo();
+
+        // Restore position
+        Pane root = (Pane) primaryStage.getScene().getRoot();
+        ImageView pieceView = getPieceView(move.destination);
+        Point2D origPos = getGraphicalCoordinates(move.source);
+        pieceView.setX(origPos.getX());
+        pieceView.setY(origPos.getY());
+
+        // Reset position identifier
+        pieceView.setId(generatePieceID(move.source));
+
+        // Reset player turn
+        playerProperty.setValue(game.getPlayerTurn() == StandardGame.PLAYER_A ? "Black" : "White");
+
+        // Update scores
+        ScoreManager scoreManager = game.getScoreManager();
+        scoreAProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_A));
+        scoreBProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_B));
+
+        // Re-add piece if attacked
+        if (move.attacks)
+            addPiece(move.destination, getImageForPiece(move.victim));
+
+        // Recover state
+        state = State.STANDBY;
     }
 
     /**
@@ -160,7 +290,7 @@ public class AppController extends Application implements GameObserver<Rectangle
         Point2D imagePosition = getCurrentCellCoordinates(clickPosition);
         RectanglePosition position = getBoardCoordinates(imagePosition);
 
-        attemptMoveWithGuide(position);
+        attemptMoveUnderGuide(position);
     }
 
     /**
@@ -173,7 +303,7 @@ public class AppController extends Application implements GameObserver<Rectangle
         switch (state) {
             // In guide mode, determine whether or not to move the piece
             case GUIDE:
-                attemptMoveWithGuide(position);
+                attemptMoveUnderGuide(position);
                 break;
 
             // In standby mode, show guide for the piece
@@ -191,13 +321,17 @@ public class AppController extends Application implements GameObserver<Rectangle
         }
     }
 
-    private void attemptMoveWithGuide(RectanglePosition toPosition) {
+    /**
+     * Attemp a move under guide state
+     * @param toPosition destination
+     */
+    private void attemptMoveUnderGuide(RectanglePosition toPosition) {
+        hideGuide();
         if (!inducerPosition.sameAs(toPosition)) {
             // If movable, move it
             boolean moved = game.stepWithMove(board.getPiece(inducerPosition).getTag(), inducerPosition, toPosition);
         }
         state = State.STANDBY;
-        hideGuide();
     }
 
 
@@ -207,20 +341,17 @@ public class AppController extends Application implements GameObserver<Rectangle
      *
      */
     public void showGuide(RectanglePosition pos) {
-        // Show
-        Set<Point2D> positions = new HashSet<>();
-        for (int i = 0; i < 8; i++) {
-            positions.addAll( board.getPossibleMoves(pos, i).stream()
-                    .map(this::getGraphicalCoordinates).collect(Collectors.toSet()));
-        }
-        guideLayer.show(positions);
+        ImageView pieceView = getPieceView(pos);
+        pieceView.setOpacity(0.5);
     }
 
     /**
      * Hide guide
      */
     public void hideGuide() {
-        guideLayer.hide();
+        if (inducerPosition == null) return;
+        ImageView pieceView = getPieceView(inducerPosition);
+        pieceView.setOpacity(1.0);
     }
 
     /**
@@ -239,6 +370,7 @@ public class AppController extends Application implements GameObserver<Rectangle
         RectanglePosition destination = move.destination;
         Point2D graphicalDestination = getGraphicalCoordinates(destination);
 
+
         // Debug output
         System.out.println(String.format("Player %s moved (%d, %d) to (%d, %d).",
                 move.player == StandardGame.PLAYER_A ? "A" : "B",
@@ -247,10 +379,9 @@ public class AppController extends Application implements GameObserver<Rectangle
         // Get piece image view by position as ID
         ImageView pieceImageView = getPieceView(source);
 
-        // TODO: Animatedly move the piece
         // Remove killed piece view (if any)
         if (move.attacks) {
-            Group root = (Group)primaryStage.getScene().getRoot();
+            Pane root = (Pane)primaryStage.getScene().getRoot();
             root.getChildren().remove(getPieceView(destination));
         }
         // Move piece view
@@ -259,6 +390,9 @@ public class AppController extends Application implements GameObserver<Rectangle
         // Update ID of view to new position
         pieceImageView.setId(generatePieceID(destination));
 
+        // Update player label
+        playerProperty.setValue(game.getPlayerTurn() == StandardGame.PLAYER_A ? "Black" : "White");
+
         // Restore state
         state = State.STANDBY;
 
@@ -266,13 +400,23 @@ public class AppController extends Application implements GameObserver<Rectangle
         if (game.getState() == Game.State.CHECKMATE) {
             state = State.HALTED;
 
+            // Set player label
+            playerProperty.setValue("Checkmate");
+
+            // Update scores
+            ScoreManager scoreManager = game.getScoreManager();
+            scoreAProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_A));
+            scoreBProperty.setValue(scoreManager.getScore(StandardGame.PLAYER_B));
+
+            // Get winner
+            RectanglePosition defeaterPosition = game.getDefeaterPosition();
+            Piece defeater = board.getPiece(defeaterPosition);
+
             // Debug output
             System.out.println(String.format("Checkmate by player %s's %s at (%d, %d).",
-                    move.player == StandardGame.PLAYER_A ? "A" : "B",
-                    board.getPiece(destination).getKind(),
-                    destination.rank, destination.file));
-
-            // TODO: Popup
+                    defeater.getTag() == StandardGame.PLAYER_A ? "A" : "B",
+                    defeater.getKind(),
+                    defeaterPosition.rank, defeaterPosition.file));
         }
     }
 
@@ -332,7 +476,7 @@ public class AppController extends Application implements GameObserver<Rectangle
      */
     private ImageView getPieceView(RectanglePosition pos) {
 //        if (!board.pieceExists(pos)) return null;
-        Group root = (Group)primaryStage.getScene().getRoot();
+        Pane root = (Pane)primaryStage.getScene().getRoot();
         Node node = root.lookup("#" + generatePieceID(pos));
         return (ImageView)node;
     }

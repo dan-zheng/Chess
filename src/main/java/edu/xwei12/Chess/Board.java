@@ -89,8 +89,7 @@ public interface Board<B extends Board<B, C>, C extends Coordinates<C>> {
      * Move a piece from one position to another, and also attack
      * @param fromPosition source position
      * @param toPosition destination position
-     * @return success
      */
-    boolean movePiece(C fromPosition, C toPosition);
+    void movePiece(C fromPosition, C toPosition);
 
 }
